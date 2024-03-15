@@ -1,5 +1,7 @@
-﻿using ECommerce_NetCore.Dto.Request;
+﻿using appDist.Event.MQ.Src.Bus;
+using ECommerce_NetCore.Dto.Request;
 using ECommerce_NetCore.Dto.Response;
+using ECommerce_NetCore.Messages.Commands;
 using ECommerce_NetCore.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,10 +12,12 @@ namespace ECommerceAPI.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryService _service;
+        private readonly IEventBus _eventBus;
 
-        public CategoriesController(ICategoryService service)
+        public CategoriesController(ICategoryService service, IEventBus eventBus)
         {
             _service = service;
+            _eventBus = eventBus;
         }
 
         [HttpGet]
@@ -33,6 +37,7 @@ namespace ECommerceAPI.Controllers
                 return NotFound(response);
             }
 
+            await _eventBus.SendCommand(new TransactionHistoryCreateCommand(response.Result));
             return Ok(response);
         }
 
@@ -61,9 +66,25 @@ namespace ECommerceAPI.Controllers
         public async Task<IActionResult> DeleteCategories(string id)
         {
 
-            var response = await _service.GetAsync(id);
+            var categoriaD = await _service.GetAsync(id);
 
-            return Ok(await _service.DeleteAsync(id));
+            //var response = new BaseResponse<string>();
+
+            var response = await _service.DeleteAsync(id);
+
+            if (response.Success)
+            {
+
+                await _eventBus.SendCommand(new TransactionHistoryCreateCommand(categoriaD.Result));
+                return Ok(response);
+            }
+            else {
+
+                return BadRequest(response);
+            }
+
+
+           
         }
 
     }

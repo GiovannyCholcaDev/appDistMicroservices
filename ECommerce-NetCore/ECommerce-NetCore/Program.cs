@@ -1,9 +1,14 @@
+using appDist.Event.MQ.Src;
 using ECommerce_NetCore.DataAccess;
 using ECommerce_NetCore.DataAccess.repositories;
 using ECommerce_NetCore.Entities;
 using ECommerce_NetCore.Services.Implementations;
 using ECommerce_NetCore.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using MediatR;
+using System.Reflection;
+using ECommerce_NetCore.Messages.Commands;
+using ECommerce_NetCore.Messages.CommandHandlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +26,14 @@ builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IProductService, ProductService>();
 
 builder.Services.AddSingleton<List<Category>>(new List<Category>());
+
+
+//MQ
+///MQ
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddRabbitMQ();
+builder.Services.AddTransient<IRequestHandler<TransactionHistoryCreateCommand, bool>, TransactionHistoryCommandHandler>();
+
 
 
 //LA CADENA DE CONEXION ESTA EN EL appsettings.json

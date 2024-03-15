@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using appDist.Event.MQ.Src.Bus;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace appDist.Event.MQ.Src
 {

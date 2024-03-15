@@ -1,5 +1,5 @@
-﻿using POLYGLOT.Cross.Event.Src.Bus;
-using POLYGLOT.Cross.Event.Src.Commands;
+﻿using appDist.Event.MQ.Src.Bus;
+using appDist.Event.MQ.Src.Commands;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,8 +38,8 @@ namespace appDist.Event.MQ.Src
             return _mediator.Send(command);
         }
 
-        public void Publish<T>(T @event) where T : POLYGLOT.Cross.Event.Src.Events.Event
-        {
+        public void Publish<T>(T @event) where T : appDist.Event.MQ.Src.Events.Event
+    {
             var factory = new ConnectionFactory()
             {
                 HostName = _options.Hostname,
@@ -64,7 +64,7 @@ namespace appDist.Event.MQ.Src
         }
 
         public void Subscribe<T, TH>()
-            where T : POLYGLOT.Cross.Event.Src.Events.Event
+            where T : appDist.Event.MQ.Src.Events.Event
             where TH : IEventHandler<T>
         {
             var eventName = typeof(T).Name;
@@ -91,7 +91,7 @@ namespace appDist.Event.MQ.Src
             StartBasicConsume<T>();
         }
 
-        private void StartBasicConsume<T>() where T : POLYGLOT.Cross.Event.Src.Events.Event
+        private void StartBasicConsume<T>() where T : appDist.Event.MQ.Src.Events.Event
         {
             var factory = new ConnectionFactory()
             {
