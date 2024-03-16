@@ -14,6 +14,23 @@ namespace ECommerce_History.api.Services.Implementations
 
         public HistoryService(ContextDatabase context) => this.context = context;
 
+        public async Task<string> CreateAsync(CategoryDto categoryDto)
+        {
+            HistoryModel historyModel = new();
+            historyModel.Name = categoryDto.Name!;
+            historyModel.Description = categoryDto.Description!;
+            historyModel.NameTable = "Category";
+            historyModel.NameTablaFK = categoryDto.Id;
+            historyModel.UnitPrice = 0;
+            historyModel.Url = "historyservice";
+
+
+            await context.Histories.AddAsync(historyModel);
+            context.Entry(historyModel).State = EntityState.Added;
+            await context.SaveChangesAsync();
+
+            return historyModel.Id.ToString();
+        }
 
         public async Task<List<CategoryHistoryDto>> ListAsync()
         {

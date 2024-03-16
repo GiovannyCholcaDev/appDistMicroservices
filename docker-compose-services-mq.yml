@@ -4,7 +4,7 @@ services:
   service-event:
     image: rabbitmq:3.8.13-management
     container_name: component-event
-    restart: always
+    restart: no
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
@@ -12,8 +12,8 @@ services:
     - 5672:5672
     - 15672:15672
     networks:
-    - projectBase-cpn-ti  
-
+    - net-app-distri
+    
 networks:
-  projectBase-cpn-ti:
-    name: micro-net
+  net-app-distri:
+    name: netappdistri

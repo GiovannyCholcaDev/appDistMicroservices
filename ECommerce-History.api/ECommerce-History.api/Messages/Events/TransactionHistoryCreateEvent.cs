@@ -1,5 +1,6 @@
-﻿using appDist.Event.MQ.Src.Events;
+﻿/*using appDist.Event.MQ.Src.Events;*/
 using ECommerce_History.api.Dto;
+using POLYGLOT.Cross.Event.Src.Events;
 
 namespace ECommerce_History.api.Messages.Events
 {
@@ -9,9 +10,9 @@ namespace ECommerce_History.api.Messages.Events
         public CategoryDto CaterogiaParamDto { get; set; }
 
 
-        public TransactionHistoryCreateEvent(CategoryDto caterogiaParamDto) {
+        public TransactionHistoryCreateEvent(CategoryDto caterogiaParametroDto) {
 
-            CaterogiaParamDto = caterogiaParamDto;
+            CaterogiaParamDto = caterogiaParametroDto;
         }
     }
 }

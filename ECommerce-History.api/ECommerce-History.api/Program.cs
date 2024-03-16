@@ -1,11 +1,11 @@
-using appDist.Event.MQ.Src;
-using appDist.Event.MQ.Src.Bus;
+using ECommerce_History.api.Messages.EventHandlers;
 using ECommerce_History.api.Messages.Events;
-using ECommerce_History.api.Messages.EventsHandlers;
 using ECommerce_History.api.Persistences;
 using ECommerce_History.api.Services.Implementations;
 using ECommerce_History.api.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using POLYGLOT.Cross.Event.Src;
+using POLYGLOT.Cross.Event.Src.Bus;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,8 +21,8 @@ builder.Services.AddSwaggerGen();
 ///MQ
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddRabbitMQ();
-builder.Services.AddTransient<TransactionHistoryEventHandler>();
-builder.Services.AddTransient<IEventHandler<TransactionHistoryCreateEvent>, TransactionHistoryEventHandler>();
+builder.Services.AddTransient<TransactionEventHandler>();
+builder.Services.AddTransient<IEventHandler<TransactionHistoryCreateEvent>, TransactionEventHandler>();
 
 //LA CADENA DE CONEXION ESTA EN EL appsettings.json
 //CON EL SIGUIENTA LINEA OBTENEMOS LA CADENA DE CONEXIONA SQL SERVER
@@ -58,5 +58,5 @@ app.Run();
 void ConfigureEventBus(IApplicationBuilder app)
 {
     var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
-    eventBus.Subscribe<TransactionHistoryCreateEvent, TransactionHistoryEventHandler>();
+    eventBus.Subscribe<TransactionHistoryCreateEvent, TransactionEventHandler>();
 }
