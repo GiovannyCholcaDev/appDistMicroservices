@@ -9,11 +9,6 @@
 /.python_modules/
 **/__pychache__/
 
-myenv/
-
-*/myenv/
-
-
 .vs/
 
 .vs

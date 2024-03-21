@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ECommerce_History.api.Migrations
 {
     [DbContext(typeof(ContextDatabase))]
-    [Migration("20240316035128_createtablas")]
+    [Migration("20240321164422_createtablas")]
     partial class createtablas
     {
         /// <inheritdoc />

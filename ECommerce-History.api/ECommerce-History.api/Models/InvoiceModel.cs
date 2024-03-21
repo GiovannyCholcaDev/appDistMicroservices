@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ECommerce_History.api.Models
 {
     [Table("factura")]
     public class InvoiceModel
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         [Column("id")]
         public int Id { get; set; }
 
