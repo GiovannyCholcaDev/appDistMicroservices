@@ -1,4 +1,4 @@
-ARG PROJECT_NAME=ECommerce-History.api
+ARG PROJECT_NAME=ECommerce-NetCore
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 ARG PROJECT_NAME
@@ -12,7 +12,7 @@ ARG PROJECT_NAME
 ENV PROJECT=$PROJECT_NAME
 WORKDIR /app
 COPY --from=build-env /app/out .
-ENV ASPNETCORE_URLS http://*:81
+ENV ASPNETCORE_URLS http://*:82
 ENV ASPNETCORE_ENVIRONMENT docker
-EXPOSE 81
+EXPOSE 82
 ENTRYPOINT dotnet ${PROJECT}.dll

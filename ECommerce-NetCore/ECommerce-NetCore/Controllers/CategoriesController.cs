@@ -27,7 +27,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("id/{id?}")]
         public async Task<IActionResult> GetCategories(string id)
         {
             var response = await _service.GetAsync(id);

@@ -15,8 +15,6 @@ docker images
 
 --verificar los contenedores que estan en la red que se creo 
 docker inspect netappdistri
-
-
 -- si no tiene la red crear con el comando:;
 docker network create netappdistri
 --agregar contenedor a una red
