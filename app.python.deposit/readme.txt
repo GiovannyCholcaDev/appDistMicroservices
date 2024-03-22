@@ -1,6 +1,15 @@
 *********************CONFIGURAR AMBIENTE DESARROLLO PYTHON**************************************
 -instalar python. https://www.python.org/downloads/ 
 
+- en docker activar la base de datosd Mysql, user=root, contraseña=admin, puerto=3307
+- en dbeaver si da error:  Public Key Retrieval is not allowed
+- For DBeaver users:
+    Right-click your connection, choose "Edit Connection"
+    On the "Connection settings" screen (main screen), click on "Edit Driver Settings"
+    Click on "Driver properties" +
+    Set these two properties: "allowPublicKeyRetrieval" to true and "useSSL" to false 
+
+
 ---dentro de la carpeta principal
 ---crear ambiente virtual -->  myenv es el nombre del ambiente viritual puede ser cualquiera, nombre corto sin espacios en blanco
 python -m venv myenv
@@ -60,3 +69,9 @@ pip install pyjwt
 --crear el metodo generar token
 --pagina web para visualizar contenido de un token:  https://jwt.io/
 
+
+************kong*******************
+host.docker.internal
+
+puesto kong-gateway:8000
+http://localhost:8000/api/appdistri/ 

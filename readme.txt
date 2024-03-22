@@ -25,7 +25,7 @@ docker network connect netappdistri database-postgres
 docker run --name echistorycontainer -d -p 5000:80 --network netappdistri ecommercehistory
 
 --verificar el logs del contenedor en el puerto
-docker logs historycontainer
+docker logs echistorycontainer
 
 
 http://localhost:5000/api/History

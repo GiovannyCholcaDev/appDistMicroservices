@@ -35,7 +35,7 @@ def depositar(deposito: DepositoDto) -> dict:
     return JSONResponse(content=jsonable_encoder(depIngresado))
 
 
-@app.get('/depositos/', tags=['cuenta'], response_model=dict, status_code=200, dependencies=[Depends(JWTBearerToken())])
+@app.get('/depositos', tags=['cuenta'], response_model=dict, status_code=200, dependencies=[Depends(JWTBearerToken())])
 def get_depositos() -> dict:
     depositoLista = depositoServicio.Consultar()
     if not depositoLista:
