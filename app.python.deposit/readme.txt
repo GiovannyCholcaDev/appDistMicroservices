@@ -75,3 +75,17 @@ host.docker.internal
 
 puesto kong-gateway:8000
 http://localhost:8000/api/appdistri/ 
+
+*********************GENERAR DEPENDENCIAS DEL APLICATIVO*******************************
+ python -m pip freeze > requirements.txt
+
+*********************INSTALAR DEPENDENCIAS DEL APLICATIVO*******************************
+ ---crear ambiente virtual
+python -m venv myenv
+
+---activar ambiente virtual
+.\myenv\Scripts\activate
+
+python -m pip install -r requirements.txt
+
+

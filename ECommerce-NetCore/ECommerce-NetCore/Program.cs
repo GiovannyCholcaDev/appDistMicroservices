@@ -28,7 +28,6 @@ builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddSingleton<List<Category>>(new List<Category>());
 
 
-//MQ
 ///MQ
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddRabbitMQ();
